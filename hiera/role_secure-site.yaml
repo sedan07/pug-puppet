@@ -1,0 +1,80 @@
+classes:
+  - nginx
+  - profile::vcsrepo
+
+nginx::nginx_vhosts:
+  'secure.aperture.science':
+    www_root: '/var/www/secure.aperture.science'
+    ssl: true
+    listen_port: 443
+    ssl_cert: '/etc/pki/secure.aperture.science.pem'
+    ssl_key: '/etc/pki/secure.aperture.science.key'
+
+files:
+  '/etc/pki':
+    ensure: 'directory'
+  '/etc/pki/secure.aperture.science.pem':
+    ensure: present
+    owner: root
+    group: root
+    require: 'File[/etc/pki]'
+    content: |
+               -----BEGIN CERTIFICATE-----
+               MIIDeDCCAmACCQDdxjbCZSz7ujANBgkqhkiG9w0BAQsFADB+MQswCQYDVQQGEwJH
+               QjEPMA0GA1UECAwGTG9uZG9uMQ8wDQYDVQQHDAZMb25kb24xGTAXBgNVBAoMEEFw
+               ZXJ0dXJlIFNjaWVuY2UxEDAOBgNVBAsMB1Rlc3RpbmcxIDAeBgNVBAMMF3NlY3Vy
+               ZS5hcGVydHVyZS5zY2llbmNlMB4XDTE1MDYxODEwMzc1OFoXDTE2MDYxNzEwMzc1
+               OFowfjELMAkGA1UEBhMCR0IxDzANBgNVBAgMBkxvbmRvbjEPMA0GA1UEBwwGTG9u
+               ZG9uMRkwFwYDVQQKDBBBcGVydHVyZSBTY2llbmNlMRAwDgYDVQQLDAdUZXN0aW5n
+               MSAwHgYDVQQDDBdzZWN1cmUuYXBlcnR1cmUuc2NpZW5jZTCCASIwDQYJKoZIhvcN
+               AQEBBQADggEPADCCAQoCggEBAN+OK/de9kxnznRohLFm5hQNWnUavkT7mT/kRMlv
+               pN8SYj71Tp1EIZNUlDZ8YLTPWhr20CNN1fx3FRPTMx6oGSDWl41cu5YZAdy4bzIl
+               8TYz74La5DzkifHKKsgUQNsxSU8LvOEPn8H6xp/bbS6u459N6GrXHSzOlvAQyHMs
+               DoU9ZaAMzL/mM7PJF+94Aok10AGxZjm9Rnss8rrW0nEBtNj4VxQo/v5sHenLhTDg
+               ll7LKILKueClCnRsmRNsYth4hHw451l4fgYw2BCW8E8oRETYE4MCUfEPM8MKQefP
+               asPo6vcBk5q4/RKwLVpAvzOh3VTguAdylgbn9pSUxVNvfmcCAwEAATANBgkqhkiG
+               9w0BAQsFAAOCAQEAiHn8Z04bmyKFwfAm5G8L1leyaOXL4TotClsHxmJjv/ZomCQT
+               M+bDpgG9xi0KqXtn4Kjeh1W94puK0es+H7IuW/HELsDG3k50cULLX6sg6PR5Byk3
+               zwbv9weQgRSBEVk8yQOxYYOvB6TKgx3TG9VO88mgkShTP/E6Yic3KXmy+S4f81UD
+               Z/EaVivjBbkInATPfO1UNlJlCrEWbjnl7K+HZNj9en8t2Y8SjXCa1xKPJsHKYLt6
+               BwC0QMQe6QwO/ucMFlmJB7GsL2+aqse3rWgi/gLgxpQkchlNaYhRKuJqgPA4b41S
+               I/PVdbwdo03+qEo8POgePmsf2NUrm7LeE8yaEQ==
+               -----END CERTIFICATE-----
+  '/etc/pki/secure.aperture.science.key':
+    ensure: present
+    owner: root
+    group: root
+    require: 'File[/etc/pki]'
+    content: |
+               -----BEGIN RSA PRIVATE KEY-----
+               MIIEowIBAAKCAQEA344r9172TGfOdGiEsWbmFA1adRq+RPuZP+REyW+k3xJiPvVO
+               nUQhk1SUNnxgtM9aGvbQI03V/HcVE9MzHqgZINaXjVy7lhkB3LhvMiXxNjPvgtrk
+               POSJ8coqyBRA2zFJTwu84Q+fwfrGn9ttLq7jn03oatcdLM6W8BDIcywOhT1loAzM
+               v+Yzs8kX73gCiTXQAbFmOb1GeyzyutbScQG02PhXFCj+/mwd6cuFMOCWXssogsq5
+               4KUKdGyZE2xi2HiEfDjnWXh+BjDYEJbwTyhERNgTgwJR8Q8zwwpB589qw+jq9wGT
+               mrj9ErAtWkC/M6HdVOC4B3KWBuf2lJTFU29+ZwIDAQABAoIBAEw+4R/tc3N7tB5f
+               x2H6Bl6wbzmhdWNxrELuR8esHD84teljIPziT9E/94zdvt3sGn83zqU71s/UjYvF
+               bJn4GxnoFqhQCGqY/NmazdH8vtgNvpKStWVPTPz6Rr0Wq0gW9znOdw0LlyFBtpyu
+               6f4SB/A9UheeZoTxsOkP0E33qLwoISfjqpUKu3pvweXUlcripSYrJ5vOcQiU+X4V
+               ov2IcXh2AC0Fcmiq/1nbE172a/ylxR7pC8gmhxNiOY38o+/jwSz6jWgOEzz0c3Ee
+               gWJE2b3Z/H9iuOpvbHvIgspZ0P1egO7hMvVmEiz0Ct5ScoegXUhL/Mh85Xbj9v3E
+               tlCUzQECgYEA/CiXehGf/jRTobBqHBpRR28ACv7W4LuLQ9R6s6z/np6/+cxjkBGJ
+               RPpyAFdwUM3ikt1VCYVVN9uIbh25muDahWWhtHh3NsI7B3GgIw62nPpmPvnLiuR8
+               A1+svSPQcmNx6kTDQxLhH/Rh6sWY4ubSUhHVXTzDAsRjWzbLKlSs/x8CgYEA4vYH
+               WEMDIjKMaP0Clrm+yJwI+alUkRksA1fNLEozBqQNkXjRWd+J4SAocJOxBEtA5AYN
+               qe3inVddVL0A0tGYq4SW5YSD/UoaRu/BQ59LxDacaK2BobLeyr1IpPwb+iCEN1Wt
+               hrJv39UeKLcjLYwumCxmAVCH1V6hZsD5kfSNv7kCgYEAhTMACUhkJokHoIKrGptA
+               UiatdCF36pDHGRaVlnINOYIMUO0JruHEjD5rmAiYWObZB9GJCRV4laAO6nQjRk/+
+               vraX+9giyTdCrUT1XW95QWT4O84CGiVl6PZSLjtL8hDb7O9T4guIBjQ2wSiOAVYC
+               xb2L4sulC8In5dgE7CB8nesCgYBQWrDhA+DBI8pohWN8P8kXN39J/TSOpq3ZhSWE
+               D8UfDcgr/+2G90jWps8KhI/AqHASCz6dMjbwY/UMQlpfSYvW9fuCyTb931WMVehD
+               68skbf1UZlGmETEl8HwexY+WMBr/iFsGfHh1c/vYiHZw8tewUs/OmVduKLHWMm5p
+               yX7CKQKBgE70vC+HhOr9T8P9BQOamII2+3xBLaFnaqpa/cWLGjzArHO5tN4xl4DD
+               quNxB07bmN66MRKNeX5gpYAS+M5rKbNbDie6eWvUslRVpHg3Wh/L9APAW5QK3tXc
+               C0DcMR/YybQJes0akkcApOaaT+1eWShZ0wNhQiGDMX30ponpGFsv
+               -----END RSA PRIVATE KEY-----
+vcsrepos:
+  '/var/www/secure.aperture.science':
+    ensure: present
+    source: 'https://github.com/sedan07/pug-secure-site.git'
+

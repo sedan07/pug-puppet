@@ -1,0 +1,13 @@
+classes:
+  - nginx
+  - profile::vcsrepo
+
+nginx::nginx_vhosts:
+  'aperture.science':
+    www_root: '/var/www/aperture.science'
+
+vcsrepos:
+  '/var/www/aperture.science':
+    ensure: present
+    source: 'https://github.com/sedan07/pug-corp-site.git'
+
